@@ -129,7 +129,7 @@ export const errorHandler = (
   error: Error,
   req: any,
   res: Response,
-  next: any
+  _next: any
 ): void => {
   const customError =
     error instanceof CustomError
