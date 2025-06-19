@@ -10,6 +10,7 @@ import {
   commonSchemas,
 } from "@/middleware/validation.middleware";
 import { StudentDataService } from "./services/student-data/student-data.service";
+import { LoginCredentials } from "@/types";
 
 // Initialize global error handlers
 setupErrorHandlers();
@@ -36,13 +37,35 @@ app.get("/health", (req: Request, res: Response) => {
 // Feature: Student Data Service
 const studentDataService = new StudentDataService();
 
-// Get all student data (login + scrape)
+// Get all student data (login + scrape) - POST method
 app.post(
   "/student/data",
   validateRequest({ body: commonSchemas.loginCredentials }),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const studentData = await studentDataService.getStudentData(req.body);
+      res.json({
+        success: true,
+        data: studentData,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// Get all student data (login + scrape) - GET method
+app.get(
+  "/student/data",
+  validateRequest({ query: commonSchemas.loginCredentials }),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const credentials: LoginCredentials = {
+        username: req.query["username"] as string,
+        password: req.query["password"] as string,
+      };
+      const studentData = await studentDataService.getStudentData(credentials);
       res.json({
         success: true,
         data: studentData,
