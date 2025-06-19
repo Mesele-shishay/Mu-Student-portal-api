@@ -1,6 +1,6 @@
-# Deploying MU eStudent API to Vercel
+# Deploying MU eStudent API to Vercel (Serverless Adapter)
 
-This guide will walk you through deploying your Express.js TypeScript API to Vercel.
+This guide will walk you through deploying your Express.js TypeScript API to Vercel using the recommended serverless adapter approach.
 
 ## Prerequisites
 
@@ -8,14 +8,28 @@ This guide will walk you through deploying your Express.js TypeScript API to Ver
 2. **Vercel CLI**: Install globally with `npm i -g vercel`
 3. **Git Repository**: Your code should be in a Git repository (GitHub, GitLab, etc.)
 
+## Architecture Overview
+
+Your project now uses the Vercel Serverless Adapter pattern:
+
+```
+├── api/
+│   └── index.ts          # Vercel serverless entry point
+├── src/
+│   └── index.ts          # Express.js app (exported)
+├── vercel.json           # Vercel configuration
+└── package.json          # Dependencies
+```
+
 ## Step-by-Step Deployment
 
 ### 1. Prepare Your Project
 
 Your project is already configured for Vercel deployment with:
 
+- ✅ `api/index.ts` - Vercel serverless adapter
 - ✅ `vercel.json` - Vercel configuration
-- ✅ `package.json` - Build scripts
+- ✅ `package.json` - Dependencies and scripts
 - ✅ `.vercelignore` - Excluded files
 - ✅ TypeScript build process
 
@@ -95,12 +109,22 @@ After deployment, your API will be available at:
 
 ## Important Notes
 
+### Serverless Adapter Benefits
+
+The Vercel Serverless Adapter approach provides:
+
+1. **Full Express.js Compatibility**: All Express.js features work seamlessly
+2. **Middleware Support**: All your middleware (CORS, Helmet, Morgan) works
+3. **Route Handling**: All your routes are preserved
+4. **Error Handling**: Your error handlers work as expected
+5. **TypeScript Support**: Full TypeScript compilation and type checking
+
 ### Serverless Limitations
 
 Vercel runs your Express.js app as serverless functions, which means:
 
 1. **Cold Starts**: First request might be slower
-2. **Function Timeout**: Default 10s, extended to 30s in `vercel.json`
+2. **Function Timeout**: Default 10s, can be extended in dashboard
 3. **Memory Limits**: 1024MB by default
 4. **Stateless**: No persistent file system or memory between requests
 
@@ -141,8 +165,13 @@ Since your API does web scraping:
    - Use your frontend domain or `*` for development
 
 4. **Function Timeout**:
-   - Increase `maxDuration` in `vercel.json` if needed
+
+   - Set function timeout in Vercel dashboard
    - Optimize your scraping logic
+
+5. **404 Errors**:
+   - Ensure `api/index.ts` exists and exports the app correctly
+   - Check `vercel.json` routes configuration
 
 ### Debugging
 

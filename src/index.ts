@@ -118,9 +118,14 @@ app.use((res: Response) => {
 // Error handler
 app.use(errorHandler);
 
-// Start server
-app.listen(config.port, () => {
-  defaultLogger.info(
-    `Server running on port ${config.port} [${config.nodeEnv}]`
-  );
-});
+// Only start the server if not in a serverless environment
+if (process.env["NODE_ENV"] !== "production" || !process.env["VERCEL"]) {
+  app.listen(config.port, () => {
+    defaultLogger.info(
+      `Server running on port ${config.port} [${config.nodeEnv}]`
+    );
+  });
+}
+
+// Export the app for Vercel serverless functions
+export default app;

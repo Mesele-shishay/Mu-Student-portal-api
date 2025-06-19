@@ -1,4 +1,4 @@
-# 🚀 Quick Start: Deploy to Vercel
+# 🚀 Quick Start: Deploy to Vercel (Serverless Adapter)
 
 ## Prerequisites
 
@@ -40,11 +40,23 @@ vercel
 
 ## 📋 What's Been Configured
 
-✅ **vercel.json** - Serverless function configuration (TypeScript build)  
+✅ **Vercel Serverless Adapter** - `api/index.ts` for serverless deployment  
+✅ **vercel.json** - Routes all traffic to the serverless function  
 ✅ **package.json** - Dependencies and scripts  
 ✅ **.vercelignore** - Excluded files from deployment  
 ✅ **TypeScript support** - Vercel builds TypeScript directly  
-✅ **Environment handling** - Production-ready config
+✅ **Express.js compatibility** - Full Express.js app in serverless environment
+
+## 🏗️ Architecture
+
+```
+├── api/
+│   └── index.ts          # Vercel serverless entry point
+├── src/
+│   └── index.ts          # Express.js app (exported)
+├── vercel.json           # Vercel configuration
+└── package.json          # Dependencies
+```
 
 ## 🌐 Your API Endpoints
 
@@ -81,6 +93,11 @@ REQUEST_TIMEOUT=30000
 
 - Update CORS_ORIGIN in Vercel environment variables
 
+**404 errors?**
+
+- Ensure `api/index.ts` exists and exports the app correctly
+- Check `vercel.json` routes configuration
+
 ## 📚 Full Documentation
 
 See `DEPLOYMENT.md` for complete deployment guide with troubleshooting, monitoring, and optimization tips.
@@ -95,3 +112,4 @@ Your Express.js TypeScript API is now deployed as serverless functions on Vercel
 - 📊 Built-in analytics
 - 🔄 Continuous deployment
 - 🔧 Automatic TypeScript compilation
+- 🚀 Serverless Express.js compatibility
