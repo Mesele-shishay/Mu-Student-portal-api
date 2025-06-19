@@ -11,6 +11,8 @@ import {
 } from "@/middleware/validation.middleware";
 import { StudentDataService } from "./services/student-data/student-data.service";
 import { LoginCredentials } from "@/types";
+import { version as expressVersion } from "express/package.json";
+import { version as typescriptVersion } from "typescript/package.json";
 
 // Initialize global error handlers
 setupErrorHandlers();
@@ -26,11 +28,38 @@ app.use(morgan("dev"));
 app.use(requestLogger);
 
 // Health check endpoint
-app.get("/health", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.json({
     success: true,
-    message: "API is healthy",
-    timestamp: new Date().toISOString(),
+    name: "MU eStudent API",
+    version: "1.0.0",
+    description: "Express.js API for accessing student data",
+    status: {
+      message: "✨ API is running smoothly",
+      environment: process.env["NODE_ENV"] || "development",
+      timestamp: new Date().toISOString(),
+    },
+    endpoints: {
+      health: "GET /",
+      data: "GET /student/data",
+    },
+    tech_stack: {
+      runtime: `Node.js ${process.version}`,
+      framework: `Express.js ${expressVersion}`,
+      language: `TypeScript ${typescriptVersion}`,
+      database: "None (Web Scraping)",
+    },
+    maintainer: {
+      github: "https://github.com/mesele-shishay",
+      email: "messeleshishaymm@gmail.com",
+      twitter: "https://x.com/mesele_shishay",
+      linkedin: "https://www.linkedin.com/in/mesele-shishay/",
+      website: "https://meselecodes.vercel.app",
+      telegram: "https://t.me/mesele_shishay",
+      instagram: "https://www.instagram.com/mesele_shishay/",
+      facebook: "https://www.facebook.com/mesele.shishay.3",
+      youtube: "https://www.youtube.com/c/mesatube",
+    },
   });
 });
 
