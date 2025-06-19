@@ -19,25 +19,11 @@ if ! vercel whoami &> /dev/null; then
     exit 1
 fi
 
-# Clean previous build
-echo "🧹 Cleaning previous build..."
-npm run clean
-
 # Install dependencies
 echo "📦 Installing dependencies..."
 npm install
 
-# Build the project
-echo "🔨 Building the project..."
-npm run build
-
-# Check if build was successful
-if [ ! -f "dist/index.js" ]; then
-    echo "❌ Build failed! dist/index.js not found."
-    exit 1
-fi
-
-echo "✅ Build completed successfully!"
+echo "✅ Dependencies installed successfully!"
 
 # Deploy to Vercel
 echo "🚀 Deploying to Vercel..."

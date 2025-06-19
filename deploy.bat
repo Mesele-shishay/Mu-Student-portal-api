@@ -22,26 +22,11 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM Clean previous build
-echo 🧹 Cleaning previous build...
-call npm run clean
-
 REM Install dependencies
 echo 📦 Installing dependencies...
 call npm install
 
-REM Build the project
-echo 🔨 Building the project...
-call npm run build
-
-REM Check if build was successful
-if not exist "dist\index.js" (
-    echo ❌ Build failed! dist\index.js not found.
-    pause
-    exit /b 1
-)
-
-echo ✅ Build completed successfully!
+echo ✅ Dependencies installed successfully!
 
 REM Deploy to Vercel
 echo 🚀 Deploying to Vercel...

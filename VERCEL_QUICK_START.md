@@ -40,10 +40,10 @@ vercel
 
 ## 📋 What's Been Configured
 
-✅ **vercel.json** - Serverless function configuration  
-✅ **package.json** - Build scripts for Vercel  
+✅ **vercel.json** - Serverless function configuration (TypeScript build)  
+✅ **package.json** - Dependencies and scripts  
 ✅ **.vercelignore** - Excluded files from deployment  
-✅ **TypeScript build** - Optimized for production  
+✅ **TypeScript support** - Vercel builds TypeScript directly  
 ✅ **Environment handling** - Production-ready config
 
 ## 🌐 Your API Endpoints
@@ -68,13 +68,13 @@ REQUEST_TIMEOUT=30000
 
 **Build fails?**
 
-```bash
-npm run build  # Test locally first
-```
+- Vercel builds TypeScript automatically
+- Check your `tsconfig.json` configuration
+- Ensure all dependencies are in `package.json`
 
 **Function timeout?**
 
-- Check `vercel.json` maxDuration setting
+- Set function timeout in Vercel dashboard
 - Optimize your scraping logic
 
 **CORS issues?**
@@ -94,3 +94,4 @@ Your Express.js TypeScript API is now deployed as serverless functions on Vercel
 - 🔒 SSL certificates
 - 📊 Built-in analytics
 - 🔄 Continuous deployment
+- 🔧 Automatic TypeScript compilation
