@@ -12,7 +12,7 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "clean": "rimraf dist",
     "vercel-build": "npm run build && npm run copy-files",
-    "copy-files": "copyfiles -u 1 \"src/**/*.{json,yaml,html,css}\" dist/"
+    "copy-files": "copyfiles -u 1 \"src/**/*.{json,yaml,html,css}\" dist/ && copyfiles api/**/* dist/"
   },
   "keywords": [
     "express",

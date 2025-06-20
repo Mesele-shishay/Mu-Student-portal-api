@@ -2,15 +2,9 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.ts",
+      "src": "package.json",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": [
-          "dist/**/*",
-          "src/**/*",
-          "tsconfig.json",
-          "package.json"
-        ],
         "buildCommand": "npm run vercel-build"
       }
     }
@@ -18,7 +12,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/index.ts"
+      "dest": "/api/index.js"
     }
   ],
   "env": {
