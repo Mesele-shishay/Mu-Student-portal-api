@@ -96,6 +96,7 @@ export class StudentDataService {
       // Step 1: Login
       const loginSuccess = await this.authService.login(credentials);
       if (!loginSuccess) {
+        console.log(loginSuccess);
         throw new UnauthorizedError("Login failed");
       }
 
