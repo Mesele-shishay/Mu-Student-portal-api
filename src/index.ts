@@ -9,7 +9,7 @@ import {
   validateRequest,
   commonSchemas,
 } from "@/middleware/validation.middleware";
-import { StudentDataService } from "./services/student-data/student-data.service";
+import { StudentDataService } from "@/services/student-data/student-data.service";
 import { LoginCredentials } from "@/types";
 import { version as expressVersion } from "express/package.json";
 import { version as typescriptVersion } from "typescript/package.json";
