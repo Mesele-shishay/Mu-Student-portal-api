@@ -7,7 +7,7 @@
       "config": {
         "includeFiles": ["src/**/*"],
         "buildCommand": "npm install && npm install tsconfig-paths ts-node && tsc",
-        "nodeVersion": "18.x"
+        "nodeVersion": "22.x"
       }
     }
   ],
